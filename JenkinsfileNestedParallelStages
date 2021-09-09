@@ -8,6 +8,9 @@ pipeline {
             }
         }
         stage('Sequential') {
+            when {
+                branch 'prod'
+            }
             stages {
                 stage('In Sequential 1') {
                     stages {
