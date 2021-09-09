@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Non-Sequential Stage') {
             steps {
-                snDevOpsChange()
                 echo "On Non-Sequential Stage"
             }
         }
