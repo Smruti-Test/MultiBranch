@@ -1,0 +1,57 @@
+pipeline {
+    agent none
+    stages {
+        stage('Non-Sequential Stage') {
+            steps {
+                snDevOpsChange()
+                echo "On Non-Sequential Stage"
+            }
+        }
+        stage('Sequential') {
+            stages {
+                stage('In Sequential 1') {
+                    stages {
+                        stage('Parallel In Sequential 1 - 1') {
+                            parallel {
+                                stage('In Parallel 1') {
+                                    steps {
+                                        echo "In Parallel 1"
+                                    }
+                                }
+                                stage('In Parallel 2') {
+                                    steps {
+                                        echo "In Parallel 2"
+                                    }
+                                }
+                            }
+                        }
+                        stage('Parallel In Sequential 1 - 2') {
+                            parallel {
+                                stage('In Parallel 3') {
+                                    steps {
+                                        echo "In Parallel 3"
+                                    }
+                                }
+                                stage('In Parallel 4') {
+                                    steps {
+                                        echo "In Parallel 4"
+                                    }
+                                }
+                            }
+                        }
+                        stage('In Sequential 2') {
+                            steps {
+                                echo "In Sequential 2"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stage('Sequential - end') {
+            steps {
+                echo "On Sequential end Stage"
+            }
+        }
+    }
+}
