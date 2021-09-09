@@ -10,9 +10,6 @@ pipeline {
             
             stages {
                 stage('In Sequential 1') {
-                    when {
-                      branch 'prod'
-                    }
                     stages {
                         stage('Parallel In Sequential 1 - 1') {
                             parallel {
@@ -53,6 +50,9 @@ pipeline {
             }
         }
         stage('Sequential - end') {
+            when {
+                      branch 'prod'
+            }
             steps {
                 echo "On Sequential end Stage"
             }
