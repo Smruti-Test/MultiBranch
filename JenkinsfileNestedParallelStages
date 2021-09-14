@@ -7,20 +7,24 @@ pipeline {
             }
         }
         stage('Sequential') {
-            when {
-                branch 'prod'  
-            }
+           
             stages {
                 stage('In Sequential 1') {
                     stages {
                         stage('Parallel In Sequential 1 - 1') {
                             parallel {
                                 stage('In Parallel 1') {
-                                    steps {
+                                 when {
+                                     branch 'prod'  
+                                 }
+                                  steps {
                                         echo "In Parallel 1"
                                     }
                                 }
                                 stage('In Parallel 2') {
+                                     when {
+                                         branch 'prod'  
+                                    }
                                     steps {
                                         echo "In Parallel 2"
                                     }
